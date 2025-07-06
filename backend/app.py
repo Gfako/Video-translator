@@ -4,9 +4,9 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 from flask_cors import CORS
+
 # Load environment variables
 load_dotenv()
-
 
 # Create Flask app
 app = Flask(__name__)
@@ -250,4 +250,7 @@ if __name__ == '__main__':
     print("🚀 Starting Video Translation API with HeyGen...")
     print("🎥 Supported languages: es, fr, de, it, pt, ru, ja, ko, zh, hi")
     print("🌐 Go to: http://localhost:5000")
-    app.run(debug=True, port=5000)
+    
+    # Fixed for Render deployment
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
